@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fulodev/components.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LandingPageWeb extends StatefulWidget {
   const LandingPageWeb({super.key});
@@ -21,7 +20,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(size: 25.0, color: Colors.black),
-        title: Row(
+        title: const Row(
           children: [
             Spacer(flex: 3),
             TabsWeb("Home"),
@@ -39,7 +38,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
       ),
       body: ListView(
         children: [
-          //first page
+          //first section
           Container(
             height: heightDevice - 56,
             child: Row(
@@ -113,7 +112,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
             ),
           ),
 
-          //second page
+          //second dection
           Container(
             height: heightDevice / 1.5,
             child: Row(
@@ -125,22 +124,22 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SansBold("About me", 40.0),
-                    SizedBox(height: 15.0),
-                    Sans(
+                    const SansBold("About me", 40.0),
+                    const SizedBox(height: 15.0),
+                    const Sans(
                       "Hello! I'm Osasu I specialise in flutter development",
                       15.0,
                     ),
-                    Sans(
+                    const Sans(
                       "I strive to ensure astounding peformance with state of ",
                       15.0,
                     ),
-                    Sans(
+                    const Sans(
                       "the art security for Androd, IOS, Web, Mac, Linux and Windows.",
                       15.0,
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     Row(
                       children: [
@@ -196,6 +195,91 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           child: Sans("AI", 15.0),
                         ),
                       ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          //third section
+          Container(
+            height: heightDevice / 1.3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SansBold("What I do?", 40.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Card(
+                      elevation: 30.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      shadowColor: Colors.redAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/webL.png",
+                              height: 200.0,
+                              width: 200.0,
+                            ),
+                            SizedBox(height: 10.0),
+                            SansBold("Web development", 15.0),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    Card(
+                      elevation: 30.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      shadowColor: Colors.redAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/app.png",
+                              height: 200.0,
+                              width: 200.0,
+                              fit: BoxFit.contain,
+                            ),
+                            SizedBox(height: 10.0),
+                            SansBold("App development", 15.0),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    Card(
+                      elevation: 30.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      shadowColor: Colors.redAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/python.png",
+                              height: 200.0,
+                              width: 200.0,
+                            ),
+                            SizedBox(height: 10.0),
+                            SansBold("Backend development", 15.0),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
