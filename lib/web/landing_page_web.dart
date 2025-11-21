@@ -12,14 +12,15 @@ class _LandingPageWebState extends State<LandingPageWeb> {
   @override
   Widget build(BuildContext context) {
     var heightDevice = MediaQuery.of(context).size.height;
+    var widthDevice = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const Drawer(),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        iconTheme: IconThemeData(size: 25.0, color: Colors.black),
+        iconTheme: const IconThemeData(size: 25.0, color: Colors.black),
         title: const Row(
           children: [
             Spacer(flex: 3),
@@ -286,6 +287,70 @@ class _LandingPageWebState extends State<LandingPageWeb> {
               ],
             ),
           ),
+
+          //fourth section
+          Container(
+            height: heightDevice,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SansBold("Contact me", 40.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        TextForm(
+                          heading: "Name",
+                          width: 350.0,
+                          hintText: "Please enter your name",
+                        ),
+                        SizedBox(height: 15),
+                        TextForm(
+                          heading: "Email",
+                          width: 350.0,
+                          hintText: "Please enter your email",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        TextForm(
+                          heading: "Company",
+                          width: 350.0,
+                          hintText: "Please enter the name of your company",
+                        ),
+                        SizedBox(height: 15.0),
+                        TextForm(
+                          heading: "Phone number",
+                          width: 350.0,
+                          hintText: "Please enter your phone number",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TextForm(
+                  heading: "Message",
+                  width: widthDevice / 1.5,
+                  hintText: "Please enter your message",
+                  maxLines: 10,
+                ),
+                MaterialButton(
+                  elevation: 20.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  height: 60.0,
+                  minWidth: 200.0,
+                  color: Colors.redAccent,
+                  child: SansBold("Submit", 20.0),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20.0),
         ],
       ),
     );

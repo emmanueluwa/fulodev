@@ -1,5 +1,6 @@
 //file for widgets used throughout the app
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TabsWeb extends StatefulWidget {
@@ -33,15 +34,17 @@ class _TabsWebState extends State<TabsWeb> {
         duration: const Duration(milliseconds: 100),
         curve: Curves.elasticIn,
         style: isSelected
-            ? GoogleFonts.archivoBlack(
-                shadows: [Shadow(color: Colors.black, offset: Offset(0, -8))],
+            ? GoogleFonts.roboto(
+                shadows: [
+                  const Shadow(color: Colors.black, offset: Offset(0, -8)),
+                ],
                 color: Colors.transparent,
                 fontSize: 25.0,
                 decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 decorationColor: Colors.redAccent,
               )
-            : GoogleFonts.archivoBlack(color: Colors.black, fontSize: 23.0),
+            : GoogleFonts.roboto(color: Colors.black, fontSize: 23.0),
         child: Text(widget.title),
       ),
     );
@@ -72,5 +75,54 @@ class Sans extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text, style: GoogleFonts.openSans(fontSize: size));
+  }
+}
+
+class TextForm extends StatelessWidget {
+  final heading;
+  final width;
+  final hintText;
+  final maxLines;
+
+  const TextForm({
+    super.key,
+    @required this.heading,
+    @required this.width,
+    @required this.hintText,
+    this.maxLines,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Sans(heading, 16.0),
+        const SizedBox(height: 5),
+        SizedBox(
+          width: width,
+          child: TextFormField(
+            inputFormatters: [LengthLimitingTextInputFormatter(1000)],
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              hintText: hintText,
+              hintStyle: GoogleFonts.poppins(fontSize: 14.0),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
