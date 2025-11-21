@@ -206,81 +206,28 @@ class _LandingPageWebState extends State<LandingPageWeb> {
           //third section
           Container(
             height: heightDevice / 1.3,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SansBold("What I do?", 40.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Card(
-                      elevation: 30.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      shadowColor: Colors.redAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/webL.png",
-                              height: 200.0,
-                              width: 200.0,
-                            ),
-                            SizedBox(height: 10.0),
-                            SansBold("Web development", 15.0),
-                          ],
-                        ),
-                      ),
+                    AnimatedCardWeb(
+                      imagePath: "assets/webL.png",
+                      text: "Web development",
                     ),
 
-                    Card(
-                      elevation: 30.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      shadowColor: Colors.redAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/app.png",
-                              height: 200.0,
-                              width: 200.0,
-                              fit: BoxFit.contain,
-                            ),
-                            SizedBox(height: 10.0),
-                            SansBold("App development", 15.0),
-                          ],
-                        ),
-                      ),
+                    AnimatedCardWeb(
+                      imagePath: "assets/app.png",
+                      text: "App development",
+                      fit: BoxFit.contain,
+                      reverse: true,
                     ),
 
-                    Card(
-                      elevation: 30.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      shadowColor: Colors.redAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/python.png",
-                              height: 200.0,
-                              width: 200.0,
-                            ),
-                            SizedBox(height: 10.0),
-                            SansBold("Backend development", 15.0),
-                          ],
-                        ),
-                      ),
+                    AnimatedCardWeb(
+                      imagePath: "assets/python.png",
+                      text: "Backend development",
                     ),
                   ],
                 ),
