@@ -82,6 +82,29 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
           ],
         ),
       ),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 117.0,
+                  backgroundColor: Colors.redAccent,
+                  child: CircleAvatar(
+                    radius: 110.0,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage(
+                      "assets/draft_portfolio_image.png",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
