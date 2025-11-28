@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fulodev/components.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageMobile extends StatefulWidget {
   const LandingPageMobile({super.key});
@@ -43,6 +45,40 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             TabsMobile(text: "About", route: "/about"),
             SizedBox(height: 20.0),
             TabsMobile(text: "Contact", route: "/contact"),
+            SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () async =>
+                      await launchUrl(Uri.parse("https://www.instagram.com/")),
+                  icon: SvgPicture.asset(
+                    "assets/instagram.svg",
+                    color: Colors.black,
+                    width: 35.0,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async =>
+                      await launchUrl(Uri.parse("https://www.twitter.com/")),
+                  icon: SvgPicture.asset(
+                    "assets/twitter.svg",
+                    color: Colors.black,
+                    width: 35.0,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async => await launchUrl(
+                    Uri.parse("https://www.github.com/emmanueluwa"),
+                  ),
+                  icon: SvgPicture.asset(
+                    "assets/github.svg",
+                    color: Colors.black,
+                    width: 35.0,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
