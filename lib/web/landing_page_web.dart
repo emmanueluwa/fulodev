@@ -257,19 +257,19 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/webL.png",
                       text: "Web development",
                     ),
 
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/app.png",
                       text: "App development",
                       fit: BoxFit.contain,
                       reverse: true,
                     ),
 
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/python.png",
                       text: "Backend development",
                     ),
@@ -292,14 +292,14 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                     Column(
                       children: [
                         TextForm(
-                          heading: "Name",
-                          width: 350.0,
+                          text: "Name",
+                          containerWidth: 350.0,
                           hintText: "Please enter your name",
                         ),
                         SizedBox(height: 15),
                         TextForm(
-                          heading: "Email",
-                          width: 350.0,
+                          text: "Email",
+                          containerWidth: 350.0,
                           hintText: "Please enter your email",
                         ),
                       ],
@@ -307,14 +307,14 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                     Column(
                       children: [
                         TextForm(
-                          heading: "Company",
-                          width: 350.0,
+                          text: "Company",
+                          containerWidth: 350.0,
                           hintText: "Please enter the name of your company",
                         ),
                         SizedBox(height: 15.0),
                         TextForm(
-                          heading: "Phone number",
-                          width: 350.0,
+                          text: "Phone number",
+                          containerWidth: 350.0,
                           hintText: "Please enter your phone number",
                         ),
                       ],
@@ -322,8 +322,8 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                   ],
                 ),
                 TextForm(
-                  heading: "Message",
-                  width: widthDevice / 1.5,
+                  text: "Message",
+                  containerWidth: widthDevice / 1.5,
                   hintText: "Please enter your message",
                   maxLines: 10,
                 ),

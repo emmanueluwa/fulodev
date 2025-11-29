@@ -107,15 +107,15 @@ class Sans extends StatelessWidget {
 }
 
 class TextForm extends StatelessWidget {
-  final heading;
-  final width;
+  final text;
+  final containerWidth;
   final hintText;
   final maxLines;
 
   const TextForm({
     super.key,
-    @required this.heading,
-    @required this.width,
+    @required this.text,
+    @required this.containerWidth,
     @required this.hintText,
     this.maxLines,
   });
@@ -125,10 +125,10 @@ class TextForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Sans(heading, 16.0),
+        Sans(text, 16.0),
         const SizedBox(height: 5),
         SizedBox(
-          width: width,
+          width: containerWidth,
           child: TextFormField(
             inputFormatters: [LengthLimitingTextInputFormatter(1000)],
             maxLines: maxLines,
@@ -155,25 +155,29 @@ class TextForm extends StatelessWidget {
   }
 }
 
-class AnimatedCardWeb extends StatefulWidget {
+class AnimatedCard extends StatefulWidget {
   final imagePath;
   final text;
   final fit;
   final reverse;
+  final height;
+  final width;
 
-  const AnimatedCardWeb({
+  const AnimatedCard({
     super.key,
     @required this.imagePath,
     @required this.text,
     this.fit,
     this.reverse,
+    this.height,
+    this.width,
   });
 
   @override
-  State<AnimatedCardWeb> createState() => _AnimatedCardWebState();
+  State<AnimatedCard> createState() => _AnimatedCardState();
 }
 
-class _AnimatedCardWebState extends State<AnimatedCardWeb>
+class _AnimatedCardState extends State<AnimatedCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller = AnimationController(
     vsync: this,
@@ -209,8 +213,8 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
             children: [
               Image.asset(
                 widget.imagePath,
-                height: 200.0,
-                width: 200.0,
+                height: widget.height ?? 200.0,
+                width: widget.width ?? 200.0,
                 fit: widget.fit == null ? widget.fit : null,
               ),
               SizedBox(height: 10.0),

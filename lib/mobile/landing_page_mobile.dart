@@ -202,6 +202,81 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             ),
           ),
           SizedBox(height: 60.0),
+
+          // third section, what i do
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SansBold("What I do?", 35.0),
+              AnimatedCard(
+                imagePath: "assets/webL.png",
+                text: "Web development",
+                width: 300.0,
+              ),
+              SizedBox(height: 35.0),
+              AnimatedCard(
+                imagePath: "assets/app.png",
+                text: "App development",
+                fit: BoxFit.contain,
+                reverse: true,
+                width: 300.0,
+              ),
+              SizedBox(height: 35.0),
+              AnimatedCard(
+                imagePath: "assets/python.png",
+                text: "Backend",
+                width: 300.0,
+              ),
+              SizedBox(height: 60.0),
+
+              // contact, fourth section
+              Wrap(
+                runSpacing: 20.0,
+                spacing: 20.0,
+                alignment: WrapAlignment.center,
+                children: [
+                  SansBold("Contact me", 35.0),
+                  TextForm(
+                    text: "Name",
+                    containerWidth: widthDevice / 1.4,
+                    hintText: "Please enter your name",
+                  ),
+                  TextForm(
+                    text: "Company",
+                    containerWidth: widthDevice / 1.4,
+                    hintText: "Please enter your company name",
+                  ),
+                  TextForm(
+                    text: "Email",
+                    containerWidth: widthDevice / 1.4,
+                    hintText: "Please enter your email address",
+                  ),
+                  TextForm(
+                    text: "Phone number",
+                    containerWidth: widthDevice / 1.4,
+                    hintText: "Please enter your phone number",
+                  ),
+                  TextForm(
+                    text: "Message",
+                    containerWidth: widthDevice / 1.4,
+                    hintText: "Please enter your message",
+                    maxLines: 10,
+                  ),
+                  MaterialButton(
+                    onPressed: () {},
+                    elevation: 20.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(10.0),
+                    ),
+                    height: 60.0,
+                    minWidth: widthDevice / 2.2,
+                    color: Colors.redAccent,
+                    child: SansBold("Submit", 20.0),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );
