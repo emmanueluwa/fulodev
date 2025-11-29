@@ -83,12 +83,83 @@ class _ContactWebState extends State<ContactWeb> {
                 background: Image.asset(
                   "assets/contact_image.jpg",
                   fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                  isAntiAlias: true,
+                  cacheWidth: null, // Don't downsample
+                  cacheHeight: null,
                 ),
+              ),
+              title: Row(
+                children: [
+                  Spacer(flex: 3),
+                  TabsWeb(title: "Home", route: "/"),
+                  Spacer(),
+                  TabsWeb(title: "Works", route: "/works"),
+                  Spacer(),
+                  TabsWeb(title: "Blog", route: "/blog"),
+                  Spacer(),
+                  TabsWeb(title: "About", route: "/about"),
+                  Spacer(),
+                  TabsWeb(title: "Contact", route: "/contact"),
+                  Spacer(),
+                ],
               ),
             ),
           ];
         },
-        body: SingleChildScrollView(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 30.0),
+              SansBold("Contact me", 40.0),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      TextForm(
+                        text: "Name",
+                        containerWidth: 350.0,
+                        hintText: "Please enter your name.",
+                      ),
+                      SizedBox(height: 15.0),
+                      TextForm(
+                        text: "Email",
+                        containerWidth: 350.0,
+                        hintText: "Please enter your email.",
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextForm(
+                        text: "Company",
+                        containerWidth: 350.0,
+                        hintText: "Please enter your company name.",
+                      ),
+                      SizedBox(height: 15.0),
+                      TextForm(
+                        text: "Phone number",
+                        containerWidth: 350.0,
+                        hintText: "Please enter your phone number.",
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.0),
+              TextForm(
+                text: "Message",
+                containerWidth: widthDevice / 1.5,
+                hintText: "Please enter your message.",
+                maxLines: 10,
+              ),
+              SizedBox(height: 20.0),
+            ],
+          ),
+        ),
       ),
     );
   }
