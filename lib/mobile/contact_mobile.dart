@@ -95,7 +95,10 @@ class _ContactMobileState extends State<ContactMobile> {
           ];
         },
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 25.0),
+          padding: EdgeInsets.only(
+            top: 25.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 80.0,
+          ),
           child: Wrap(
             runSpacing: 20.0,
             spacing: 20.0,
