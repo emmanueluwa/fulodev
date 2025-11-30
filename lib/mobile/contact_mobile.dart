@@ -13,6 +13,8 @@ class ContactMobile extends StatefulWidget {
 class _ContactMobileState extends State<ContactMobile> {
   @override
   Widget build(BuildContext context) {
+    var widthDevice = MediaQuery.of(context).size.width;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -80,12 +82,67 @@ class _ContactMobileState extends State<ContactMobile> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              expandedHeight: 400.0,
               backgroundColor: Colors.white,
               iconTheme: IconThemeData(size: 35.0, color: Colors.black),
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  "assets/contact_image.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ];
         },
-        body: SingleChildScrollView(),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 25.0),
+          child: Wrap(
+            runSpacing: 20.0,
+            spacing: 20.0,
+            alignment: WrapAlignment.center,
+            children: [
+              SansBold("Contact me", 35.0),
+              TextForm(
+                text: "Name",
+                containerWidth: widthDevice / 1.4,
+                hintText: "Please enter your first name.",
+              ),
+              TextForm(
+                text: "Company",
+                containerWidth: widthDevice / 1.4,
+                hintText: "Please enter your company name.",
+              ),
+              TextForm(
+                text: "Phone number",
+                containerWidth: widthDevice / 1.4,
+                hintText: "Please enter your phone number.",
+              ),
+              TextForm(
+                text: "Email",
+                containerWidth: widthDevice / 1.4,
+                hintText: "Please enter your email.",
+              ),
+              TextForm(
+                text: "Message",
+                containerWidth: widthDevice / 1.4,
+                hintText: "Please enter your message.",
+                maxLines: 10,
+              ),
+
+              MaterialButton(
+                onPressed: () {},
+                elevation: 20.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                height: 60.0,
+                minWidth: widthDevice / 2.2,
+                color: Colors.redAccent,
+                child: SansBold("Submit", 20.0),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
