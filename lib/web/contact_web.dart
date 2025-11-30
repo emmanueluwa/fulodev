@@ -113,7 +113,7 @@ class _ContactWebState extends State<ContactWeb> {
               SizedBox(height: 30.0),
               SansBold("Contact me", 40.0),
               SizedBox(height: 20.0),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
@@ -157,6 +157,18 @@ class _ContactWebState extends State<ContactWeb> {
                 maxLines: 10,
               ),
               SizedBox(height: 20.0),
+              MaterialButton(
+                onPressed: () {},
+                elevation: 20.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                height: 60.0,
+                minWidth: 200.0,
+                color: Colors.redAccent,
+                child: SansBold("Submit", 20.0),
+              ),
+              SizedBox(height: 10.0),
             ],
           ),
         ),
