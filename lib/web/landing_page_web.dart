@@ -164,7 +164,11 @@ class _LandingPageWebState extends State<LandingPageWeb> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/web.jpg", height: widthDevice / 1.9),
+                Image.asset(
+                  "assets/web.jpg",
+                  height: widthDevice / 1.9,
+                  filterQuality: FilterQuality.high,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,

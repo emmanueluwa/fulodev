@@ -50,7 +50,10 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                   shape: BoxShape.circle,
                   border: Border.all(width: 2.0, color: Colors.black),
                 ),
-                child: Image.asset("assets/draft_portfolio_image.png"),
+                child: Image.asset(
+                  "assets/draft_portfolio_image.png",
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             ),
             TabsMobile(text: "Home", route: "/"),

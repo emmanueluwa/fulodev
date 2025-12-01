@@ -224,6 +224,7 @@ class _AnimatedCardState extends State<AnimatedCard>
                 height: widget.height ?? 200.0,
                 width: widget.width ?? 200.0,
                 fit: widget.fit == null ? widget.fit : null,
+                filterQuality: FilterQuality.high,
               ),
               SizedBox(height: 10.0),
               SansBold(widget.text, 15.0),
