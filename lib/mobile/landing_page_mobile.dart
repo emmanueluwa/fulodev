@@ -102,22 +102,21 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
       body: ListView(
         children: [
           //intro first section
+          CircleAvatar(
+            radius: 117.0,
+            backgroundColor: Colors.redAccent,
+            child: CircleAvatar(
+              radius: 110.0,
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage("assets/draft_portfolio_image.png"),
+            ),
+          ),
+
           Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 117.0,
-                  backgroundColor: Colors.redAccent,
-                  child: CircleAvatar(
-                    radius: 110.0,
-                    backgroundColor: Colors.white,
-                    backgroundImage: AssetImage(
-                      "assets/draft_portfolio_image.png",
-                    ),
-                  ),
-                ),
                 SizedBox(height: 25.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +142,7 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                 ),
                 SizedBox(height: 15.0),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Wrap(
                       direction: Axis.vertical,
@@ -173,9 +172,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
 
           //about me, second section
           Padding(
-            padding: EdgeInsets.only(left: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SansBold("About me", 35.0),

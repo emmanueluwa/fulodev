@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
+import "package:fulodev/mobile/about_mobile.dart";
 import "package:fulodev/mobile/contact_mobile.dart";
 import "package:fulodev/mobile/landing_page_mobile.dart";
+import "package:fulodev/web/about_web.dart";
 import "package:fulodev/web/contact_web.dart";
 import "package:fulodev/web/landing_page_web.dart";
 
@@ -30,6 +32,20 @@ class Routes {
                 return const ContactWeb();
               } else {
                 return const ContactMobile();
+              }
+            },
+          ),
+        );
+
+      case "/about":
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 800) {
+                return const AboutWeb();
+              } else {
+                return const AboutMobile();
               }
             },
           ),
