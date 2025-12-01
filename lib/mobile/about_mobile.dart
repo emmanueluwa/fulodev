@@ -155,6 +155,58 @@ class _AboutMobileState extends State<AboutMobile> {
                 ),
               ),
               SizedBox(height: 40.0),
+
+              //web development section, second section
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AnimatedCard(imagePath: "assets/webL.png", width: 200.0),
+                  SizedBox(height: 30.0),
+                  SansBold("Web development", 20.0),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+              Sans(
+                "I'm here to build your presence online with state of the art web apps.",
+                15.0,
+              ),
+
+              // app development, third section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 20.0),
+                  AnimatedCard(
+                    imagePath: "assets/app.png",
+                    width: 200.0,
+                    reverse: true,
+                  ),
+                  SizedBox(height: 30.0),
+                  SansBold("App development", 20.0),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+              Sans(
+                "Do you need a high-performance, responsive and beautiful app? Don't worry, I've got you covered.",
+                15.0,
+              ),
+
+              //backend development, fourth section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 20.0),
+                  AnimatedCard(imagePath: "assets/python.png", width: 200.0),
+                  SizedBox(height: 30.0),
+                  SansBold("Backend development", 20.0),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+              Sans(
+                "Do you need a scalable and secure backend? Let's have a conversation about how I can help you with that.",
+                15.0,
+              ),
+              SizedBox(height: 20.0),
             ],
           ),
         ),
