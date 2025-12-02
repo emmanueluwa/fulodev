@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BlogMobile extends StatefulWidget {
@@ -109,7 +110,15 @@ class _BlogMobileState extends State<BlogMobile> {
             ),
           ];
         },
-        body: ListView(children: [BlogPost()]),
+        body: ListView(
+          children: [
+            BlogPost(),
+            BlogPost(),
+            BlogPost(),
+            BlogPost(),
+            BlogPost(),
+          ],
+        ),
       ),
     );
   }
@@ -130,6 +139,14 @@ class _BlogPostState extends State<BlogPost> {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
       child: Container(
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            style: BorderStyle.solid,
+            width: 3.0,
+            color: Colors.black,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -160,6 +177,34 @@ class _BlogPostState extends State<BlogPost> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 7.0),
+            Text(
+              """Hidayah AI
+An AI-powered Quran verse finder that helps Muslims discover relevant Quranic verses based on natural language queries like "verses about patience" or "guidance during hardship." Returns matching verses with Tafsir Ibn Kathir explanations, bookmarking, and search history.
+Tech Stack:
+
+Frontend: Flutter (Dart) - cross-platform mobile app
+Backend: FastAPI (Python) with LangChain framework
+AI/ML: OpenAI API for embeddings and completions
+Vector Database: Pinecone for semantic search
+Database: PostgreSQL for user queries, bookmarks, and history
+Additional: Pydantic for validation, SQLAlchemy ORM
+
+System Design:
+
+User submits query via Flutter app
+FastAPI backend generates embedding using OpenAI
+Pinecone performs vector similarity search across 15,563 Tafsir Ibn Kathir chunks
+LangChain orchestrates retrieval and response generation
+Relevant verses + Tafsir returned to user
+Query logged and bookmarks stored in PostgreSQL
+Session cookies track user activity across requests""",
+              style: GoogleFonts.openSans(fontSize: 15.0),
+              maxLines: expand == true ? null : 3,
+              overflow: expand == true
+                  ? TextOverflow.visible
+                  : TextOverflow.ellipsis,
             ),
           ],
         ),
