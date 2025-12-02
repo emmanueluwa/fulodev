@@ -14,110 +14,114 @@ class BlogMobile extends StatefulWidget {
 class _BlogMobileState extends State<BlogMobile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      endDrawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DrawerHeader(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 2.0, color: Colors.black),
-                ),
-                child: Image.asset(
-                  "assets/draft_portfolio_image.png",
-                  filterQuality: FilterQuality.high,
-                ),
-              ),
-            ),
-            TabsMobile(text: "Home", route: "/"),
-            SizedBox(height: 20.0),
-            TabsMobile(text: "Works", route: "/works"),
-            SizedBox(height: 20.0),
-            TabsMobile(text: "Blog", route: "/blog"),
-            SizedBox(height: 20.0),
-            TabsMobile(text: "About", route: "/about"),
-            SizedBox(height: 20.0),
-            TabsMobile(text: "Contact", route: "/contact"),
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () async =>
-                      await launchUrl(Uri.parse("https://www.instagram.com/")),
-                  icon: SvgPicture.asset(
-                    "assets/instagram.svg",
-                    color: Colors.black,
-                    width: 35.0,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () async =>
-                      await launchUrl(Uri.parse("https://www.twitter.com/")),
-                  icon: SvgPicture.asset(
-                    "assets/twitter.svg",
-                    color: Colors.black,
-                    width: 35.0,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () async => await launchUrl(
-                    Uri.parse("https://www.github.com/emmanueluwa"),
-                  ),
-                  icon: SvgPicture.asset(
-                    "assets/github.svg",
-                    color: Colors.black,
-                    width: 35.0,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              backgroundColor: Colors.white,
-              iconTheme: IconThemeData(size: 35.0, color: Colors.black),
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Container(
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.white,
+        endDrawer: Drawer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DrawerHeader(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(3.0),
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 2.0, color: Colors.black),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 4.0),
-                  child: AbelCustom(
-                    text: "Welcome to my blog",
-                    size: 24.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                  child: Image.asset(
+                    "assets/draft_portfolio_image.png",
+                    filterQuality: FilterQuality.high,
                   ),
-                ),
-                background: Image.asset(
-                  "assets/blog.jpg",
-                  filterQuality: FilterQuality.high,
-                  fit: BoxFit.cover,
                 ),
               ),
-              expandedHeight: 400.0,
-            ),
-          ];
-        },
-        body: ListView(
-          children: [
-            BlogPost(),
-            BlogPost(),
-            BlogPost(),
-            BlogPost(),
-            BlogPost(),
-          ],
+              TabsMobile(text: "Home", route: "/"),
+              SizedBox(height: 20.0),
+              TabsMobile(text: "Works", route: "/works"),
+              SizedBox(height: 20.0),
+              TabsMobile(text: "Blog", route: "/blog"),
+              SizedBox(height: 20.0),
+              TabsMobile(text: "About", route: "/about"),
+              SizedBox(height: 20.0),
+              TabsMobile(text: "Contact", route: "/contact"),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () async => await launchUrl(
+                      Uri.parse("https://www.instagram.com/"),
+                    ),
+                    icon: SvgPicture.asset(
+                      "assets/instagram.svg",
+                      color: Colors.black,
+                      width: 35.0,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async =>
+                        await launchUrl(Uri.parse("https://www.twitter.com/")),
+                    icon: SvgPicture.asset(
+                      "assets/twitter.svg",
+                      color: Colors.black,
+                      width: 35.0,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async => await launchUrl(
+                      Uri.parse("https://www.github.com/emmanueluwa"),
+                    ),
+                    icon: SvgPicture.asset(
+                      "assets/github.svg",
+                      color: Colors.black,
+                      width: 35.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                backgroundColor: Colors.white,
+                iconTheme: IconThemeData(size: 35.0, color: Colors.black),
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(3.0),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 4.0),
+                    child: AbelCustom(
+                      text: "Welcome to my blog",
+                      size: 24.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  background: Image.asset(
+                    "assets/blog.jpg",
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                expandedHeight: 400.0,
+              ),
+            ];
+          },
+          body: ListView(
+            children: [
+              BlogPost(),
+              BlogPost(),
+              BlogPost(),
+              BlogPost(),
+              BlogPost(),
+            ],
+          ),
         ),
       ),
     );
