@@ -107,7 +107,39 @@ class _WorksWebState extends State<WorksWeb> {
             ),
           ];
         },
-        body: ListView(),
+        body: ListView(
+          children: [
+            Column(
+              children: [
+                SizedBox(height: 30.0),
+                SansBold("Works", 40.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AnimatedCard(
+                      imagePath: "assets/portfolio_screenshot.png",
+                      height: 200.0,
+                      width: 300.0,
+                    ),
+                    SizedBox(
+                      width: widthDevice / 3,
+                      child: Column(
+                        children: [
+                          SansBold("Portfolio", 30.0),
+                          SizedBox(height: 15.0),
+                          Sans(
+                            "Deployed on IOS, Android and Web, this portfolio project was built with flutter for the frontend and responsive UI along with FastAPI for the backend.",
+                            15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

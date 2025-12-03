@@ -85,7 +85,7 @@ class _AboutWebState extends State<AboutWeb> {
             Spacer(flex: 3),
             TabsWeb(title: "Home", route: "/"),
             Spacer(),
-            TabsWeb(title: "Projects", route: "/projects"),
+            TabsWeb(title: "Works", route: "/works"),
             Spacer(),
             TabsWeb(title: "Blog", route: "/blog"),
             Spacer(),
