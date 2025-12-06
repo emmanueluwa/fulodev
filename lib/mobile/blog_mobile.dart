@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import "package:http/http.dart";
 
 class BlogMobile extends StatefulWidget {
   const BlogMobile({super.key});
@@ -12,6 +15,33 @@ class BlogMobile extends StatefulWidget {
 }
 
 class _BlogMobileState extends State<BlogMobile> {
+  void article() async {
+    final response = await get(
+      Uri.parse("http://192.168.1.123:8000/blogs"),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> blogs = jsonDecode(response.body);
+
+      print("\n");
+      print("============");
+
+      for (var blog in blogs) {
+        print(blog["title"]);
+      }
+    } else {
+      print("\n");
+      print("invalid response");
+    }
+  }
+
+  @override
+  void initState() {
+    article();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
