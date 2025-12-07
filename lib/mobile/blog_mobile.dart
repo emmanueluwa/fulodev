@@ -261,7 +261,9 @@ class _BlogPostState extends State<BlogPost> {
                     });
                   },
                   icon: Icon(
-                    Icons.arrow_drop_down_circle_outlined,
+                    expand
+                        ? Icons.arrow_drop_up_outlined
+                        : Icons.arrow_drop_down_circle_outlined,
                     color: Colors.black,
                   ),
                 ),
