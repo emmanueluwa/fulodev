@@ -5,7 +5,18 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import "package:http/http.dart";
+import "package:http/http.dart" as http;
+
+class Blog {
+  final String title;
+  final String text;
+
+  Blog({required this.title, required this.text});
+
+  factory Blog.fromJson(Map<String, dynamic> json) {
+    return Blog(title: json["title"], text: json["text"]);
+  }
+}
 
 class BlogMobile extends StatefulWidget {
   const BlogMobile({super.key});
@@ -15,31 +26,41 @@ class BlogMobile extends StatefulWidget {
 }
 
 class _BlogMobileState extends State<BlogMobile> {
-  List title = [];
-  List text = [];
+  List<Blog> blogs = [];
+  bool isLoading = true;
+  String? errorMessage;
 
-  void article() async {
-    final response = await get(
-      Uri.parse("http://192.168.1.123:8000/blogs"),
-      headers: {"Content-Type": "application/json"},
-    );
+  void fetchBlogs() async {
+    try {
+      final response = await http.get(
+        Uri.parse("http://192.168.1.123:8000/blogs"),
+        headers: {"Content-Type": "application/json"},
+      );
 
-    if (response.statusCode == 200) {
-      final List<dynamic> blogs = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
 
-      for (var blog in blogs) {
-        title.add(blog["title"]);
-        text.add(blog["text"]);
+        setState(() {
+          blogs = data.map((json) => Blog.fromJson(json)).toList();
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage = "Failed to load blogs: ${response.statusCode}";
+          isLoading = false;
+        });
       }
-    } else {
-      print("\n");
-      print("invalid response");
+    } catch (e) {
+      setState(() {
+        errorMessage = "Error: $e";
+        isLoading = false;
+      });
     }
   }
 
   @override
   void initState() {
-    article();
+    fetchBlogs();
     super.initState();
   }
 
@@ -144,23 +165,56 @@ class _BlogMobileState extends State<BlogMobile> {
               ),
             ];
           },
-          body: ListView.builder(
-            itemCount: title.length,
-            itemBuilder: (BuildContext context, int index) {
-              return BlogPost(title: title[index], text: text[index]);
-            },
-          ),
+          body: _buildBody(),
         ),
       ),
+    );
+  }
+
+  Widget _buildBody() {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator(color: Colors.redAccent));
+    }
+
+    if (errorMessage != null) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(errorMessage!, style: TextStyle(color: Colors.red)),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  isLoading = true;
+                  errorMessage = null;
+                });
+                fetchBlogs();
+              },
+              child: Text("Retry"),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (blogs.isEmpty) {
+      return Center(child: Text("No blogs yet"));
+    }
+
+    return ListView.builder(
+      itemCount: blogs.length,
+      itemBuilder: (context, index) {
+        return BlogPost(blog: blogs[index]);
+      },
     );
   }
 }
 
 class BlogPost extends StatefulWidget {
-  final title;
-  final text;
+  final blog;
 
-  const BlogPost({super.key, @required this.title, @required this.text});
+  const BlogPost({super.key, required this.blog});
 
   @override
   State<BlogPost> createState() => _BlogPostState();
@@ -195,7 +249,7 @@ class _BlogPostState extends State<BlogPost> {
                     borderRadius: BorderRadius.circular(3.0),
                   ),
                   child: AbelCustom(
-                    text: widget.title.toString(),
+                    text: widget.blog.title,
                     size: 25.0,
                     color: Colors.white,
                   ),
@@ -215,7 +269,7 @@ class _BlogPostState extends State<BlogPost> {
             ),
             SizedBox(height: 7.0),
             Text(
-              widget.text.toString(),
+              widget.blog.text,
               style: GoogleFonts.openSans(fontSize: 15.0),
               maxLines: expand == true ? null : 3,
               overflow: expand == true
