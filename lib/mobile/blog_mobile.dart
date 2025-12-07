@@ -15,6 +15,9 @@ class BlogMobile extends StatefulWidget {
 }
 
 class _BlogMobileState extends State<BlogMobile> {
+  List title = [];
+  List text = [];
+
   void article() async {
     final response = await get(
       Uri.parse("http://192.168.1.123:8000/blogs"),
@@ -24,11 +27,9 @@ class _BlogMobileState extends State<BlogMobile> {
     if (response.statusCode == 200) {
       final List<dynamic> blogs = jsonDecode(response.body);
 
-      print("\n");
-      print("============");
-
       for (var blog in blogs) {
-        print(blog["title"]);
+        title.add(blog["title"]);
+        text.add(blog["text"]);
       }
     } else {
       print("\n");
@@ -143,14 +144,11 @@ class _BlogMobileState extends State<BlogMobile> {
               ),
             ];
           },
-          body: ListView(
-            children: [
-              BlogPost(),
-              BlogPost(),
-              BlogPost(),
-              BlogPost(),
-              BlogPost(),
-            ],
+          body: ListView.builder(
+            itemCount: title.length,
+            itemBuilder: (BuildContext context, int index) {
+              return BlogPost(title: title[index], text: text[index]);
+            },
           ),
         ),
       ),
@@ -159,7 +157,10 @@ class _BlogMobileState extends State<BlogMobile> {
 }
 
 class BlogPost extends StatefulWidget {
-  const BlogPost({super.key});
+  final title;
+  final text;
+
+  const BlogPost({super.key, @required this.title, @required this.text});
 
   @override
   State<BlogPost> createState() => _BlogPostState();
@@ -194,7 +195,7 @@ class _BlogPostState extends State<BlogPost> {
                     borderRadius: BorderRadius.circular(3.0),
                   ),
                   child: AbelCustom(
-                    text: "Hidayah AI",
+                    text: widget.title.toString(),
                     size: 25.0,
                     color: Colors.white,
                   ),
@@ -214,26 +215,7 @@ class _BlogPostState extends State<BlogPost> {
             ),
             SizedBox(height: 7.0),
             Text(
-              """Hidayah AI
-An AI-powered Quran verse finder that helps Muslims discover relevant Quranic verses based on natural language queries like "verses about patience" or "guidance during hardship." Returns matching verses with Tafsir Ibn Kathir explanations, bookmarking, and search history.
-Tech Stack:
-
-Frontend: Flutter (Dart) - cross-platform mobile app
-Backend: FastAPI (Python) with LangChain framework
-AI/ML: OpenAI API for embeddings and completions
-Vector Database: Pinecone for semantic search
-Database: PostgreSQL for user queries, bookmarks, and history
-Additional: Pydantic for validation, SQLAlchemy ORM
-
-System Design:
-
-User submits query via Flutter app
-FastAPI backend generates embedding using OpenAI
-Pinecone performs vector similarity search across 15,563 Tafsir Ibn Kathir chunks
-LangChain orchestrates retrieval and response generation
-Relevant verses + Tafsir returned to user
-Query logged and bookmarks stored in PostgreSQL
-Session cookies track user activity across requests""",
+              widget.text.toString(),
               style: GoogleFonts.openSans(fontSize: 15.0),
               maxLines: expand == true ? null : 3,
               overflow: expand == true
