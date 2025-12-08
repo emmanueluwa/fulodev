@@ -147,6 +147,7 @@ class TextForm extends StatelessWidget {
   final hintText;
   final maxLines;
   final controller;
+  final validator;
 
   const TextForm({
     super.key,
@@ -155,6 +156,7 @@ class TextForm extends StatelessWidget {
     @required this.hintText,
     this.maxLines,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -167,6 +169,7 @@ class TextForm extends StatelessWidget {
         SizedBox(
           width: containerWidth,
           child: TextFormField(
+            validator: validator,
             controller: controller,
             inputFormatters: [LengthLimitingTextInputFormatter(1000)],
             maxLines: maxLines,
