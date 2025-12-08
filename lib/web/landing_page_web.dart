@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
+import 'package:logger/web.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageWeb extends StatefulWidget {
@@ -19,6 +20,14 @@ class _LandingPageWebState extends State<LandingPageWeb> {
       },
     );
   }
+
+  var logger = Logger(printer: PrettyPrinter());
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _companyNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +299,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const SansBold("Contact me", 40.0),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
@@ -299,12 +308,14 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           text: "Name",
                           containerWidth: 350.0,
                           hintText: "Please enter your name",
+                          controller: _nameController,
                         ),
                         SizedBox(height: 15),
                         TextForm(
                           text: "Email",
                           containerWidth: 350.0,
                           hintText: "Please enter your email",
+                          controller: _emailController,
                         ),
                       ],
                     ),
@@ -314,12 +325,14 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           text: "Company",
                           containerWidth: 350.0,
                           hintText: "Please enter the name of your company",
+                          controller: _companyNameController,
                         ),
                         SizedBox(height: 15.0),
                         TextForm(
                           text: "Phone number",
                           containerWidth: 350.0,
                           hintText: "Please enter your phone number",
+                          controller: _phoneController,
                         ),
                       ],
                     ),
@@ -330,6 +343,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                   containerWidth: widthDevice / 1.5,
                   hintText: "Please enter your message",
                   maxLines: 10,
+                  controller: _messageController,
                 ),
                 MaterialButton(
                   elevation: 20.0,
@@ -340,7 +354,9 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                   minWidth: 200.0,
                   color: Colors.redAccent,
                   child: SansBold("Submit", 20.0),
-                  onPressed: () {},
+                  onPressed: () {
+                    logger.d(_nameController.text);
+                  },
                 ),
               ],
             ),
