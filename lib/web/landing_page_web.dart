@@ -372,9 +372,20 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                     minWidth: 200.0,
                     color: Colors.redAccent,
                     child: SansBold("Submit", 20.0),
-                    onPressed: () {
+                    onPressed: () async {
                       logger.d(_nameController.text);
-                      formKey.currentState!.validate();
+
+                      final addData = FormService();
+                      if (formKey.currentState!.validate()) {
+                        await addData.addDataFromForm(
+                          _nameController.text,
+                          _companyNameController.text,
+                          _emailController.text,
+                          _phoneController.text,
+                          _messageController.text,
+                        );
+                      }
+                      ;
                     },
                   ),
                 ],

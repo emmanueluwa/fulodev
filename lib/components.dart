@@ -1,7 +1,11 @@
 //file for widgets used throughout the app
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:logger/web.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -174,9 +178,13 @@ class TextForm extends StatelessWidget {
             inputFormatters: [LengthLimitingTextInputFormatter(1000)],
             maxLines: maxLines,
             decoration: InputDecoration(
-              focusedErrorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.orange),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.deepOrange),
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red),
@@ -268,5 +276,35 @@ class _AnimatedCardState extends State<AnimatedCard>
         ),
       ),
     );
+  }
+}
+
+class FormService {
+  var logger = Logger(printer: PrettyPrinter());
+
+  addDataFromForm(
+    final name,
+    final company,
+    final email,
+    final number,
+    final message,
+  ) async {
+    final response = await http.post(
+      Uri.parse("http://192.168.1.123:8000/create_message/"),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        "name": name,
+        "company": company,
+        "email": email,
+        "phone_number": number,
+        "message": message,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      logger.d("form sent successfully");
+    } else {
+      return logger.d("something went wrong");
+    }
   }
 }
