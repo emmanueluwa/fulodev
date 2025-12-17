@@ -308,3 +308,13 @@ class FormService {
     }
   }
 }
+
+Future DialogError(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: SansBold("Message sent", 20.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+    ),
+  );
+}

@@ -384,6 +384,10 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           _phoneController.text,
                           _messageController.text,
                         );
+
+                        formKey.currentState!.reset();
+
+                        DialogError(context);
                       }
                       ;
                     },
