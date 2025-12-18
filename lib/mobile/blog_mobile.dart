@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
+import 'package:fulodev/config/api_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import "package:http/http.dart" as http;
@@ -33,7 +34,7 @@ class _BlogMobileState extends State<BlogMobile> {
   void fetchBlogs() async {
     try {
       final response = await http.get(
-        Uri.parse("http://192.168.1.123:8000/blogs"),
+        Uri.parse(ApiConfig.blogUrl),
         headers: {"Content-Type": "application/json"},
       );
 

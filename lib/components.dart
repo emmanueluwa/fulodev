@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fulodev/config/api_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/web.dart';
@@ -290,7 +291,7 @@ class FormService {
     final message,
   ) async {
     final response = await http.post(
-      Uri.parse("http://192.168.1.123:8000/create_message/"),
+      Uri.parse(ApiConfig.createMessageUrl),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "name": name,
