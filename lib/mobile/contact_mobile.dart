@@ -20,6 +20,8 @@ class _ContactMobileState extends State<ContactMobile> {
 
   final formKey = GlobalKey<FormState>();
 
+  bool isSubmitting = false;
+
   @override
   Widget build(BuildContext context) {
     var widthDevice = MediaQuery.of(context).size.width;
@@ -170,24 +172,35 @@ class _ContactMobileState extends State<ContactMobile> {
                 ),
 
                 MaterialButton(
-                  onPressed: () async {
-                    logger.d(_nameController.text);
+                  onPressed: isSubmitting
+                      ? null
+                      : () async {
+                          if (formKey.currentState!.validate()) {
+                            setState(() {
+                              isSubmitting = true;
+                            });
 
-                    final addData = FormService();
-                    if (formKey.currentState!.validate()) {
-                      await addData.addDataFromForm(
-                        _nameController.text,
-                        _companyNameController.text,
-                        _emailController.text,
-                        _phoneController.text,
-                        _messageController.text,
-                      );
+                            final addData = FormService();
+                            final success = await addData.addDataFromForm(
+                              _nameController.text,
+                              _companyNameController.text,
+                              _emailController.text,
+                              _phoneController.text,
+                              _messageController.text,
+                            );
 
-                      formKey.currentState!.reset();
+                            setState(() {
+                              isSubmitting = false;
+                            });
 
-                      DialogError(context);
-                    }
-                  },
+                            if (success) {
+                              formKey.currentState!.reset();
+                              DialogSuccess(context);
+                            } else {
+                              DialogFailed(context);
+                            }
+                          }
+                        },
                   elevation: 20.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -195,7 +208,9 @@ class _ContactMobileState extends State<ContactMobile> {
                   height: 60.0,
                   minWidth: widthDevice / 2.2,
                   color: Colors.redAccent,
-                  child: SansBold("Submit", 20.0),
+                  child: isSubmitting
+                      ? CircularProgressIndicator(color: Colors.redAccent)
+                      : SansBold("Submit", 20.0),
                 ),
               ],
             ),

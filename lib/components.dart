@@ -283,6 +283,8 @@ class _AnimatedCardState extends State<AnimatedCard>
 class FormService {
   var logger = Logger(printer: PrettyPrinter());
 
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
+
   addDataFromForm(
     final name,
     final company,
@@ -290,32 +292,69 @@ class FormService {
     final number,
     final message,
   ) async {
-    final response = await http.post(
-      Uri.parse(ApiConfig.createMessageUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        "name": name,
-        "company": company,
-        "email": email,
-        "phone_number": number,
-        "message": message,
-      }),
-    );
+    try {
+      isLoading.value = true;
 
-    if (response.statusCode == 200) {
-      logger.d("form sent successfully");
-    } else {
-      return logger.d("something went wrong");
+      final response = await http.post(
+        Uri.parse(ApiConfig.createMessageUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "name": name,
+          "company": company,
+          "email": email,
+          "phone_number": number,
+          "message": message,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        logger.d("form sent successfully");
+        return true;
+      } else {
+        logger.d("something went wrong");
+        return false;
+      }
+    } catch (e) {
+      logger.d("Exception: $e");
+      return false;
+    } finally {
+      isLoading.value = false;
     }
   }
 }
 
-Future DialogError(BuildContext context) {
+Future DialogSuccess(BuildContext context) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
       title: SansBold("Message sent", 20.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text("Ok"),
+        ),
+      ],
+    ),
+  );
+}
+
+Future DialogFailed(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: SansBold("Error", 20.0),
+      content: Sans(
+        "Faled to send message. Please try again or contact me through social media.",
+        15.0,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text("Ok"),
+        ),
+      ],
     ),
   );
 }
