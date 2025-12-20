@@ -12,11 +12,6 @@ class LandingPageWeb extends StatefulWidget {
 class _LandingPageWebState extends State<LandingPageWeb> {
   var logger = Logger(printer: PrettyPrinter());
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _companyNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _messageController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   bool isSubmitting = false;
@@ -238,120 +233,8 @@ class _LandingPageWebState extends State<LandingPageWeb> {
           ),
 
           //fourth section
-          Container(
-            height: heightDevice,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SansBold("Contact me", 40.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          TextForm(
-                            text: "Name",
-                            containerWidth: 350.0,
-                            hintText: "Please enter your name",
-                            controller: _nameController,
-                            validator: (text) {
-                              if (text.toString().isEmpty) {
-                                return "Name is required";
-                              }
-                            },
-                          ),
-                          SizedBox(height: 15),
-                          TextForm(
-                            text: "Email",
-                            containerWidth: 350.0,
-                            hintText: "Please enter your email",
-                            controller: _emailController,
-                            validator: (text) {
-                              if (text.toString().isEmpty) {
-                                return "Email is required";
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          TextForm(
-                            text: "Company",
-                            containerWidth: 350.0,
-                            hintText: "Please enter the name of your company",
-                            controller: _companyNameController,
-                          ),
-                          SizedBox(height: 15.0),
-                          TextForm(
-                            text: "Phone number",
-                            containerWidth: 350.0,
-                            hintText: "Please enter your phone number",
-                            controller: _phoneController,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  TextForm(
-                    text: "Message",
-                    containerWidth: widthDevice / 1.5,
-                    hintText: "Please enter your message",
-                    maxLines: 10,
-                    controller: _messageController,
-                    validator: (text) {
-                      if (text.toString().isEmpty) {
-                        return "Message is required";
-                      }
-                    },
-                  ),
-                  MaterialButton(
-                    elevation: 20.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    height: 60.0,
-                    minWidth: 200.0,
-                    color: Colors.redAccent,
-                    child: isSubmitting
-                        ? CircularProgressIndicator(color: Colors.redAccent)
-                        : SansBold("Submit", 20.0),
-                    onPressed: isSubmitting
-                        ? null
-                        : () async {
-                            if (formKey.currentState!.validate()) {
-                              setState(() {
-                                isSubmitting = true;
-                              });
-
-                              final addData = FormService();
-                              final success = await addData.addDataFromForm(
-                                _nameController.text,
-                                _companyNameController.text,
-                                _emailController.text,
-                                _phoneController.text,
-                                _messageController.text,
-                              );
-
-                              setState(() {
-                                isSubmitting = false;
-                              });
-
-                              if (success) {
-                                formKey.currentState!.reset();
-                                DialogSuccess(context);
-                              } else {
-                                DialogFailed(context);
-                              }
-                            }
-                          },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          SizedBox(height: 15.0),
+          ContactForm(),
           SizedBox(height: 20.0),
         ],
       ),

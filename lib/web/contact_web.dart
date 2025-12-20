@@ -23,10 +23,6 @@ class _ContactWebState extends State<ContactWeb> {
 
   @override
   Widget build(BuildContext context) {
-    var widthDevice = MediaQuery.of(context).size.width;
-
-    var logger = Logger(printer: PrettyPrinter());
-
     return Scaffold(
       drawer: DrawersWeb(),
       backgroundColor: Colors.white,
@@ -51,124 +47,7 @@ class _ContactWebState extends State<ContactWeb> {
             ),
           ];
         },
-        body: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                SizedBox(height: 30.0),
-                SansBold("Contact me", 40.0),
-                SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        TextForm(
-                          text: "Name",
-                          containerWidth: 350.0,
-                          hintText: "Please enter your name.",
-                          controller: _nameController,
-                          validator: (text) {
-                            if (text.toString().isEmpty) {
-                              return "Name is required";
-                            }
-                          },
-                        ),
-                        SizedBox(height: 15.0),
-                        TextForm(
-                          text: "Email",
-                          containerWidth: 350.0,
-                          hintText: "Please enter your email.",
-                          controller: _emailController,
-                          validator: (text) {
-                            if (text.toString().isEmpty) {
-                              return "Email is required";
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextForm(
-                          text: "Company",
-                          containerWidth: 350.0,
-                          hintText: "Please enter your company name.",
-                          controller: _companyNameController,
-                        ),
-                        SizedBox(height: 15.0),
-                        TextForm(
-                          text: "Phone number",
-                          containerWidth: 350.0,
-                          hintText: "Please enter your phone number.",
-                          controller: _phoneController,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0),
-                TextForm(
-                  text: "Message",
-                  containerWidth: widthDevice / 1.5,
-                  hintText: "Please enter your message.",
-                  maxLines: 10,
-                  controller: _messageController,
-                  validator: (text) {
-                    if (text.toString().isEmpty) {
-                      return "Message is required";
-                    }
-                  },
-                ),
-                SizedBox(height: 20.0),
-                MaterialButton(
-                  onPressed: isSubmitting
-                      ? null
-                      : () async {
-                          if (formKey.currentState!.validate()) {
-                            setState(() {
-                              isSubmitting = true;
-                            });
-
-                            final addData = FormService();
-                            final success = await addData.addDataFromForm(
-                              _nameController.text,
-                              _companyNameController.text,
-                              _emailController.text,
-                              _phoneController.text,
-                              _messageController.text,
-                            );
-
-                            setState(() {
-                              isSubmitting = false;
-                            });
-
-                            if (success) {
-                              formKey.currentState!.reset();
-                              DialogSuccess(context);
-                            } else {
-                              DialogFailed(context);
-                            }
-                          }
-                        },
-                  elevation: 20.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  height: 60.0,
-                  minWidth: 200.0,
-                  color: Colors.redAccent,
-                  child: isSubmitting
-                      ? CircularProgressIndicator(color: Colors.redAccent)
-                      : SansBold("Submit", 20.0),
-                ),
-                SizedBox(height: 10.0),
-              ],
-            ),
-          ),
-        ),
+        body: SingleChildScrollView(child: ContactForm()),
       ),
     );
   }
