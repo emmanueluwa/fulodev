@@ -14,15 +14,6 @@ class AboutWeb extends StatefulWidget {
 class _AboutWebState extends State<AboutWeb> {
   @override
   Widget build(BuildContext context) {
-    urlLauncher(String imgPath, String url) {
-      return IconButton(
-        icon: SvgPicture.asset(imgPath, color: Colors.black, width: 35.0),
-        onPressed: () async {
-          await launchUrl(Uri.parse(url));
-        },
-      );
-    }
-
     redContainer(String text) {
       return Container(
         decoration: BoxDecoration(
@@ -41,60 +32,13 @@ class _AboutWebState extends State<AboutWeb> {
     var widthDevice = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 72.0,
-              backgroundColor: Colors.redAccent,
-              child: CircleAvatar(
-                radius: 70.0,
-                backgroundColor: Colors.white,
-                backgroundImage: AssetImage("assets/draft_portfolio_image.png"),
-              ),
-            ),
-            const SizedBox(height: 15.0),
-            const SansBold("Osasu Uwadiae", 30.0),
-            const SizedBox(height: 15.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                urlLauncher(
-                  "assets/instagram.svg",
-                  "https://www.instagram.com/",
-                ),
-                urlLauncher("assets/twitter.svg", "https://x.com/fuloXXXX/"),
-                urlLauncher(
-                  "assets/github.svg",
-                  "https://github.com/emmanueluwa/",
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawersWeb(),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
         iconTheme: const IconThemeData(size: 25.0, color: Colors.black),
-        title: const Row(
-          children: [
-            Spacer(flex: 3),
-            TabsWeb(title: "Home", route: "/"),
-            Spacer(),
-            TabsWeb(title: "Works", route: "/works"),
-            Spacer(),
-            TabsWeb(title: "Blog", route: "/blog"),
-            Spacer(),
-            TabsWeb(title: "About", route: "/about"),
-            Spacer(),
-            TabsWeb(title: "Contact", route: "/contact"),
-            Spacer(),
-          ],
-        ),
+        title: TabsWebList(),
       ),
       body: ListView(
         children: [

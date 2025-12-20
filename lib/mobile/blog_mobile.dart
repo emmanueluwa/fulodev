@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -33,10 +34,12 @@ class _BlogMobileState extends State<BlogMobile> {
 
   void fetchBlogs() async {
     try {
-      final response = await http.get(
-        Uri.parse(ApiConfig.blogUrl),
-        headers: {"Content-Type": "application/json"},
-      );
+      final response = await http
+          .get(
+            Uri.parse(ApiConfig.blogUrl),
+            headers: {"Content-Type": "application/json"},
+          )
+          .timeout(Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
@@ -45,12 +48,29 @@ class _BlogMobileState extends State<BlogMobile> {
           blogs = data.map((json) => Blog.fromJson(json)).toList();
           isLoading = false;
         });
+      } else if (response.statusCode == 404) {
+        setState(() {
+          blogs = [];
+          isLoading = false;
+        });
       } else {
         setState(() {
           errorMessage = "Failed to load blogs: ${response.statusCode}";
           isLoading = false;
         });
       }
+    } on http.ClientException {
+      //network error server down/no internet
+      setState(() {
+        errorMessage =
+            "Cannot connect to server. Please check your connection.";
+        isLoading = false;
+      });
+    } on TimeoutException {
+      setState(() {
+        errorMessage = "Request timeout out. Please try again.";
+        isLoading = false;
+      });
     } catch (e) {
       setState(() {
         errorMessage = "Error: $e";

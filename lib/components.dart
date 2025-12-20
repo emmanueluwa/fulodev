@@ -3,10 +3,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/config/api_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/web.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -62,6 +64,34 @@ class _TabsWebState extends State<TabsWeb> {
   }
 }
 
+class TabsWebList extends StatefulWidget {
+  const TabsWebList({super.key});
+
+  @override
+  State<TabsWebList> createState() => _TabsWebListState();
+}
+
+class _TabsWebListState extends State<TabsWebList> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Spacer(flex: 3),
+        TabsWeb(title: "Home", route: "/"),
+        Spacer(),
+        TabsWeb(title: "Works", route: "/works"),
+        Spacer(),
+        TabsWeb(title: "Blog", route: "/blog"),
+        Spacer(),
+        TabsWeb(title: "About", route: "/about"),
+        Spacer(),
+        TabsWeb(title: "Contact", route: "/contact"),
+        Spacer(),
+      ],
+    );
+  }
+}
+
 class TabsMobile extends StatefulWidget {
   final text;
   final route;
@@ -88,6 +118,103 @@ class _TabsMobileState extends State<TabsMobile> {
       onPressed: () {
         Navigator.of(context).pushNamed(widget.route);
       },
+    );
+  }
+}
+
+urlLauncher(String imgPath, String url) {
+  return IconButton(
+    icon: SvgPicture.asset(imgPath, color: Colors.black, width: 35.0),
+    onPressed: () async {
+      await launchUrl(Uri.parse(url));
+    },
+  );
+}
+
+class DrawersWeb extends StatelessWidget {
+  const DrawersWeb({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CircleAvatar(
+            radius: 72.0,
+            backgroundColor: Colors.redAccent,
+            child: CircleAvatar(
+              radius: 70.0,
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage("assets/draft_portfolio_image.png"),
+            ),
+          ),
+          const SizedBox(height: 15.0),
+          const SansBold("Osasu Uwadiae", 30.0),
+          const SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              urlLauncher("assets/instagram.svg", "https://www.instagram.com/"),
+              urlLauncher("assets/twitter.svg", "https://x.com/fuloXXXX/"),
+              urlLauncher(
+                "assets/github.svg",
+                "https://github.com/emmanueluwa/",
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DrawersMobile extends StatelessWidget {
+  const DrawersMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DrawerHeader(
+            padding: EdgeInsets.only(bottom: 20.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 2.0, color: Colors.black),
+              ),
+              child: Image.asset(
+                "assets/draft_portfolio_image.png",
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+          ),
+          TabsMobile(text: "Home", route: "/"),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Works", route: "/works"),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Blog", route: "/blog"),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "About", route: "/about"),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Contact", route: "/contact"),
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              urlLauncher("assets/instagram.svg", "https://www.instagram.com/"),
+              urlLauncher("assets/twitter.svg", "https://x.com/fuloXXXX/"),
+              urlLauncher(
+                "assets/github.svg",
+                "https://github.com/emmanueluwa/",
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
