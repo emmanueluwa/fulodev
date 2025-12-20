@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
 import 'package:fulodev/config/api_config.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
-import "package:http/http.dart" as http;
+import 'package:http/http.dart' as http;
 
 class Blog {
   final String title;
@@ -20,14 +18,14 @@ class Blog {
   }
 }
 
-class BlogMobile extends StatefulWidget {
-  const BlogMobile({super.key});
+class BlogPage extends StatefulWidget {
+  const BlogPage({super.key});
 
   @override
-  State<BlogMobile> createState() => _BlogMobileState();
+  State<BlogPage> createState() => _BlogPageState();
 }
 
-class _BlogMobileState extends State<BlogMobile> {
+class _BlogPageState extends State<BlogPage> {
   List<Blog> blogs = [];
   bool isLoading = true;
   String? errorMessage;
@@ -87,74 +85,13 @@ class _BlogMobileState extends State<BlogMobile> {
 
   @override
   Widget build(BuildContext context) {
+    bool isWeb = MediaQuery.of(context).size.width > 800;
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.white,
-        endDrawer: Drawer(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DrawerHeader(
-                padding: EdgeInsets.only(bottom: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 2.0, color: Colors.black),
-                  ),
-                  child: Image.asset(
-                    "assets/draft_portfolio_image.png",
-                    filterQuality: FilterQuality.high,
-                  ),
-                ),
-              ),
-              TabsMobile(text: "Home", route: "/"),
-              SizedBox(height: 20.0),
-              TabsMobile(text: "Works", route: "/works"),
-              SizedBox(height: 20.0),
-              TabsMobile(text: "Blog", route: "/blog"),
-              SizedBox(height: 20.0),
-              TabsMobile(text: "About", route: "/about"),
-              SizedBox(height: 20.0),
-              TabsMobile(text: "Contact", route: "/contact"),
-              SizedBox(height: 20.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    onPressed: () async => await launchUrl(
-                      Uri.parse("https://www.instagram.com/"),
-                    ),
-                    icon: SvgPicture.asset(
-                      "assets/instagram.svg",
-                      color: Colors.black,
-                      width: 35.0,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () async =>
-                        await launchUrl(Uri.parse("https://www.twitter.com/")),
-                    icon: SvgPicture.asset(
-                      "assets/twitter.svg",
-                      color: Colors.black,
-                      width: 35.0,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () async => await launchUrl(
-                      Uri.parse("https://www.github.com/emmanueluwa"),
-                    ),
-                    icon: SvgPicture.asset(
-                      "assets/github.svg",
-                      color: Colors.black,
-                      width: 35.0,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        endDrawer: DrawersMobile(),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -162,16 +99,18 @@ class _BlogMobileState extends State<BlogMobile> {
                 backgroundColor: Colors.white,
                 iconTheme: IconThemeData(size: 35.0, color: Colors.black),
                 flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
+                  centerTitle: isWeb ? false : true,
                   title: Container(
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(3.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 4.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isWeb ? 7.0 : 4.0,
+                    ),
                     child: AbelCustom(
                       text: "Welcome to my blog",
-                      size: 24.0,
+                      size: isWeb ? 30.0 : 24.0,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -182,7 +121,7 @@ class _BlogMobileState extends State<BlogMobile> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                expandedHeight: 400.0,
+                expandedHeight: isWeb ? 500.0 : 400.0,
               ),
             ];
           },
@@ -193,6 +132,8 @@ class _BlogMobileState extends State<BlogMobile> {
   }
 
   Widget _buildBody() {
+    bool isWeb = MediaQuery.of(context).size.width > 800;
+
     if (isLoading) {
       return Center(child: CircularProgressIndicator(color: Colors.redAccent));
     }
@@ -226,7 +167,7 @@ class _BlogMobileState extends State<BlogMobile> {
     return ListView.builder(
       itemCount: blogs.length,
       itemBuilder: (context, index) {
-        return BlogPost(blog: blogs[index]);
+        return BlogPost(blog: blogs[index], isWeb: isWeb);
       },
     );
   }
@@ -234,8 +175,9 @@ class _BlogMobileState extends State<BlogMobile> {
 
 class BlogPost extends StatefulWidget {
   final blog;
+  final isWeb;
 
-  const BlogPost({super.key, required this.blog});
+  const BlogPost({super.key, required this.blog, required this.isWeb});
 
   @override
   State<BlogPost> createState() => _BlogPostState();
@@ -247,7 +189,9 @@ class _BlogPostState extends State<BlogPost> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
+      padding: widget.isWeb
+          ? EdgeInsets.only(left: 70.0, right: 70.0, top: 40.0)
+          : EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
       child: Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
