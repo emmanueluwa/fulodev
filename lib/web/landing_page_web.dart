@@ -141,57 +141,13 @@ class _LandingPageWebState extends State<LandingPageWeb> {
 
                     Row(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.redAccent,
-                              style: BorderStyle.solid,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          padding: EdgeInsets.all(7.0),
-                          child: Sans("Flutter", 15.0),
-                        ),
+                        redContainer("Flutter"),
                         SizedBox(width: 7),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.redAccent,
-                              style: BorderStyle.solid,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          padding: EdgeInsets.all(7.0),
-                          child: Sans("Python", 15.0),
-                        ),
+                        redContainer("Python"),
                         SizedBox(width: 7),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.redAccent,
-                              style: BorderStyle.solid,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          padding: EdgeInsets.all(7.0),
-                          child: Sans("FastAPI", 15.0),
-                        ),
+                        redContainer("FastAPI"),
                         SizedBox(width: 7),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.redAccent,
-                              style: BorderStyle.solid,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          padding: EdgeInsets.all(7.0),
-                          child: Sans("AI", 15.0),
-                        ),
+                        redContainer("AI"),
                       ],
                     ),
                   ],

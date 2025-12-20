@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fulodev/components.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutWeb extends StatefulWidget {
   const AboutWeb({super.key});
@@ -14,21 +11,6 @@ class AboutWeb extends StatefulWidget {
 class _AboutWebState extends State<AboutWeb> {
   @override
   Widget build(BuildContext context) {
-    redContainer(String text) {
-      return Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.redAccent,
-            style: BorderStyle.solid,
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        padding: EdgeInsets.all(7.0),
-        child: Text(text, style: GoogleFonts.openSans(fontSize: 15.0)),
-      );
-    }
-
     var widthDevice = MediaQuery.of(context).size.width;
 
     return Scaffold(

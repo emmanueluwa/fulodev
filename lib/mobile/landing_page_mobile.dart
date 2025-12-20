@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fulodev/components.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/web.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageMobile extends StatefulWidget {
   const LandingPageMobile({super.key});
@@ -19,25 +16,8 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
 
   bool isSubmitting = false;
 
-  redContainer(String text) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.redAccent,
-          style: BorderStyle.solid,
-          width: 2.0,
-        ),
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      padding: EdgeInsets.all(7.0),
-      child: Text(text, style: GoogleFonts.openSans(fontSize: 15.0)),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    var widthDevice = MediaQuery.of(context).size.width;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,

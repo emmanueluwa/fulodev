@@ -14,21 +14,6 @@ class AboutMobile extends StatefulWidget {
 class _AboutMobileState extends State<AboutMobile> {
   @override
   Widget build(BuildContext context) {
-    redContainer(String text) {
-      return Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.redAccent,
-            style: BorderStyle.solid,
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        padding: EdgeInsets.all(7.0),
-        child: Text(text, style: GoogleFonts.openSans(fontSize: 15.0)),
-      );
-    }
-
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
